@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 typedef struct{
-    char nome[50];
+    char nome[50], resultado[10];
     int rga;
-    float n1, n2, n3, ma;
+    float n1, n2, n3, ma, mf;
 }regaluno;
 
 void cadastroAluno(regaluno alunos[], int n);
@@ -23,8 +25,8 @@ int main(void){
         printf("1 - Cadastrar um novo Aluno \n"); 
         printf("2 - Remover Aluno \n"); 
         printf("3 - Atualizar as notas dos Alunos \n"); 
-        printf("4 - Exibir Alunos cadastrados \n"); 
-        printf("5 - Exibir as medias dos Alunos \n"); 
+        printf("4 - Exibir Alunos cadastrados em ordem por nome \n"); 
+        printf("5 - Exibir as medias dos Alunos em ordem alfabética \n"); 
         printf("7 - Sair \n");
         printf("------------------------\n");
         
@@ -41,7 +43,10 @@ int main(void){
                     printf("Quantos Alunos vc ira cadastrar?  ");
                     scanf("%d", &n);
 
-                    cadastroAluno(alunos, n);
+                    if(n < 50)
+                        cadastroAluno(alunos, n);
+                    else
+                        printf("Limite máximo para cadastro atingido!!\n\n");
 
                     printf("Informe um numero para poder continuar: (1 sim ou 0 nao)\n ");
                     scanf("%d", &resp);
@@ -120,6 +125,10 @@ int main(void){
                 case 6:
                 
                 break;
+
+                default:
+                    printf("Informe um número válido!!\n");
+                break;
             }
             
         }
@@ -175,11 +184,17 @@ void mostrandoValores(regaluno alunos[], int n){
         printf("Nota 3:  %.2f \n", alunos[i].n3);
         alunos[i].ma = (alunos[i].n1 + alunos[i].n2 + alunos[i].n3) / 3;
         printf("Media do Aluno:  %.2f \n", alunos[i].ma);
+
+        if(alunos[i].ma < 6)
+            printf("\nREPROVADO!!\n\n");
+            /*alunos[i].resultado = "Reprovado";*/
+        else
+            printf("\nAPROVADO!!\n\n");
     }
 }
 
 
-
+/*  Função sem recursão de busca de alunos
 int buscaAluno(regaluno alunos[], int num, int n){
 
     int i, posicao;
@@ -198,4 +213,27 @@ int buscaAluno(regaluno alunos[], int num, int n){
 
 
     return posicao;
+}
+*/
+
+/* função recursiva de busca de alunos */
+int buscaAluno(regaluno alunos[], int num, int n){
+
+    int posicao;
+
+    if(alunos[n - 1].rga == num){
+        posicao = n;
+        return posicao;
+    }
+    else
+        return buscaAluno(alunos, num, n - 1);
+}
+
+/* Media Geral em função recursiva */
+int mediageral(regaluno alunos[], int n){
+
+    if(n == 0)
+        return 0;
+    else
+        return alunos[n - 1].ma + mediaGeral(alunos, n - 1);
 }
