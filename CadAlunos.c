@@ -2,12 +2,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-/* Declaração de funções utilizadas */
-void cadastroAluno(regaluno alunos[], int n);
-void mostrandoValores(regaluno alunos[], int n);
-int buscaAluno(regaluno alunos[], int num, int n);
-
-
 /* Struct com as informações */
 typedef struct{
     char nome[50], resultado[10];
@@ -15,6 +9,10 @@ typedef struct{
     float n1, n2, n3, ma, mf;
 }regaluno;
 
+/* Declaração de funções utilizadas */
+void cadastroAluno(regaluno alunos[], int n);
+void mostrandoValores(regaluno alunos[], int n);
+int buscaAluno(regaluno alunos[], int num, int n);
 
 /* Função principal */
 int main(void){
@@ -131,7 +129,7 @@ int main(void){
 			
 			/* Sair da aplicação */
 			case 6:
-				printf("Muito Obrigado!  Volte sempre!");
+				printf("Muito Obrigado!  Volte sempre!\n");
 				flag = 0;
 			break;
 
@@ -200,7 +198,7 @@ void mostrandoValores(regaluno alunos[], int n){
 }
 
 
-/*  Função sem recursão de busca de alunos
+/*  Função sem recursão de busca de alunos 
 int buscaAluno(regaluno alunos[], int num, int n){
 
     int i, posicao;
@@ -217,7 +215,6 @@ int buscaAluno(regaluno alunos[], int num, int n){
         i = i + 1;
     }
 
-
     return posicao;
 }
 */
@@ -225,18 +222,22 @@ int buscaAluno(regaluno alunos[], int num, int n){
 /* Função recursiva de busca de alunos */
 int buscaAluno(regaluno alunos[], int num, int n){
 
-    int posicao;
+    int i, posicao;
+
+	i = 0; 
 
     if(alunos[n - 1].rga == num){
-        posicao = n;
+        posicao = i;
+        i = i + n;
         return posicao;
     }
     else
         return buscaAluno(alunos, num, n - 1);
 }
 
+
 /* Media Geral em função recursiva */
-int mediageral(regaluno alunos[], int n){
+int mediaGeral(regaluno alunos[], int n){
 
     if(n == 0)
         return 0;

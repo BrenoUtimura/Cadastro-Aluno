@@ -17,5 +17,5 @@ Projeto de cadastro de aluno e manipulação de informações em C ainda em dese
 
 # Problems to fix-it
 
-- [ ] No case 3 so switch está com problema na atualização dos valores das notas;
-- [ ] Verificar a função buscaAluno(), pois não deu certo quando fui tentar executar a remoção de um aluno como no case 2 ou de atualizar os valores no case 3;
+- [x] No case 3 so switch está com problema na atualização dos valores das notas;
+- [x] Verificar a função buscaAluno(), pois não deu certo quando fui tentar executar a remoção de um aluno como no case 2 ou de atualizar os valores no case 3;
