@@ -198,7 +198,7 @@ void mostrandoValores(regaluno alunos[], int n){
 }
 
 
-/*  Função sem recursão de busca de alunos 
+/*  Função sem recursão de busca de alunos */
 int buscaAluno(regaluno alunos[], int num, int n){
 
     int i, posicao;
@@ -217,9 +217,9 @@ int buscaAluno(regaluno alunos[], int num, int n){
 
     return posicao;
 }
-*/
 
-/* Função recursiva de busca de alunos */
+
+/* Função recursiva de busca de alunos 
 int buscaAluno(regaluno alunos[], int num, int n){
 
     int i, posicao;
@@ -234,6 +234,7 @@ int buscaAluno(regaluno alunos[], int num, int n){
     else
         return buscaAluno(alunos, num, n - 1);
 }
+*/
 
 
 /* Media Geral em função recursiva */

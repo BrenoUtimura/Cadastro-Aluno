@@ -17,5 +17,8 @@ Projeto de cadastro de aluno e manipulação de informações em C ainda em dese
 
 # Problems to fix-it
 
-- [x] No case 3 so switch está com problema na atualização dos valores das notas;
-- [x] Verificar a função buscaAluno(), pois não deu certo quando fui tentar executar a remoção de um aluno como no case 2 ou de atualizar os valores no case 3;
+- [ ] No case 3 so switch está com problema na atualização dos valores das notas;
+- [ ] Verificar a função buscaAluno(), pois não deu certo quando fui tentar executar a remoção de um aluno como no case 2 ou de atualizar os valores no case 3;
+- [ ] O sistema funciona de forma linear de cadastrar os alunos, atualizar e excluir. Porém se caso eu precisar cadastrar um novo aluno ele apaga os outros alunos que já estavam cadastrados;
+- [ ] Quando coloca notas maiores do que 10 ele deixa passar pois não tem nenhum verificador de limite de nota a ser digitado;
+- [ ] Na atualização de valores quando informa um RGA aleatório ele permiti digitar os valores e com isso o sistema acaba atualizando sempre o primeiro registro;
