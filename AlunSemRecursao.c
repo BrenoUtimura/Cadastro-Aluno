@@ -1,18 +1,29 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 
-/* struct dos dados que serão lidos dos alunos */
-typedef struct{
-    char nome[50], resultado[10];
-    int rga;
-    float n1, n2, n3, ma, mf;
-}regaluno;
-
-
-/* função principal */
 int main(void){
-    
+
+    float * vetor;
+    int n, i;
+
+    scanf("%d", &n);
+
+    vetor = (float *) malloc(sizeof(float) * n);
+
+    if(vetor == NULL){
+        printf("Não foi possível alocar memória para o vetor!\n");
+        return 0;
+    }
+
+    for(i = 0; i < n; i++){
+        scanf("%f", &vetor[i]);
+    }
+
+    for(i = 0; i < n; i++){
+        printf("%.2f\n", vetor[i]);
+    }
+
+    free(vetor);
 
     return 0;
 }

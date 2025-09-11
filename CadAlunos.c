@@ -10,7 +10,7 @@ typedef struct{
 }regaluno;
 
 /* Declaração de funções utilizadas */
-void cadastroAluno(regaluno alunos[], int n);
+int cadastroAluno(regaluno alunos[], int n);
 void mostrandoValores(regaluno alunos[], int n);
 int buscaAluno(regaluno alunos[], int num, int n);
 
@@ -18,8 +18,9 @@ int buscaAluno(regaluno alunos[], int num, int n);
 int main(void){
     
     regaluno alunos[50];
-    int n, i, flag, num, resp, posicao;
-    
+    int n, i, flag, num, resp, posicao, qtd_aluno;
+
+    qtd_aluno = 0;
     flag = 1;
     
     while(flag == 1){
@@ -44,8 +45,12 @@ int main(void){
 				printf("Quantos Alunos vc ira cadastrar?  ");
 				scanf("%d", &n);
 
-				if(n < 50)
-					cadastroAluno(alunos, n);
+				if(qtd_aluno + n < 50){
+					for(i = 0; i < n; i++){
+						posicao = cadastroAluno(alunos, i);
+					}
+					qtd_aluno = qtd_aluno + n;
+				}
 				else
 					printf("Limite máximo para cadastro atingido!!\n\n");
 
@@ -70,6 +75,7 @@ int main(void){
 						alunos[i] = alunos[i + 1];  
 					}
 					n = n - 1;
+					qtd_aluno = qtd_aluno - 1;
 
 					printf("\nALUNO REMOVIDO COM SUCESSO!! \n\n");
 				} 
@@ -148,28 +154,45 @@ int main(void){
 /* Funções do sistema */
 
 /* Função de cadastrar o aluno */
-void cadastroAluno(regaluno alunos[], int n){
+int cadastroAluno(regaluno alunos[], int n){
     
-    int i;
-                    
-    for(i = 0; i < n; i++){
-        printf("Digite o nome do Aluno:  ");
-        scanf(" %[^\n]", alunos[i].nome);
-                        
-        printf("Informe o RGA:  ");
-        scanf("%d", &alunos[i].rga);
-                        
-        printf("Informe a primeira nota:  ");
-        scanf("%f", &alunos[i].n1);
-                        
-        printf("Informe a segunda nota:  ");
-        scanf("%f", &alunos[i].n2);
-                    
-        printf("Informe a terceira nota:  ");
-        scanf("%f", &alunos[i].n3);
+    int rga, posicao;
 
-       
-    }
+    /* Chamando a função de busca para verificar se tem alunos cadastrados em tal posição */
+	printf("Informe o RGA que deseja pesquisar: \n");
+	scanf("%d", &rga);
+
+	posicao = buscaAluno(alunos, rga, n);
+
+	/* Verifica se o RGA já existe no meu vetor */
+	while(posicao != -1){
+		printf("Este RGA já existe!\n");
+
+		printf("Informe outro RGA!\n");
+		
+		printf("Informe o RGA que deseja pesquisar: \n");
+		scanf("%d", &rga);
+
+		posicao = buscaAluno(alunos, rga, n);
+	}
+
+
+	
+	/* Cadastrando o aluno e suas informações */
+    printf("Digite o nome do Aluno:  ");
+    scanf(" %[^\n]", alunos[n].nome);
+                        
+    alunos[n].rga = rga;
+                        
+    printf("Informe a primeira nota:  ");
+    scanf("%f", &alunos[n].n1);
+                        
+    printf("Informe a segunda nota:  ");
+    scanf("%f", &alunos[n].n2);
+                    
+    printf("Informe a terceira nota:  ");
+    scanf("%f", &alunos[n].n3);
+	
                     
     printf("\nCADASTRADO COM SUCESSO!! \n\n");
 }
@@ -198,7 +221,7 @@ void mostrandoValores(regaluno alunos[], int n){
 }
 
 
-/*  Função sem recursão de busca de alunos */
+/*  Função sem recursão de busca de alunos 
 int buscaAluno(regaluno alunos[], int num, int n){
 
     int i, posicao;
@@ -217,24 +240,23 @@ int buscaAluno(regaluno alunos[], int num, int n){
 
     return posicao;
 }
-
-
-/* Função recursiva de busca de alunos 
-int buscaAluno(regaluno alunos[], int num, int n){
-
-    int i, posicao;
-
-	i = 0; 
-
-    if(alunos[n - 1].rga == num){
-        posicao = i;
-        i = i + n;
-        return posicao;
-    }
-    else
-        return buscaAluno(alunos, num, n - 1);
-}
 */
+
+
+/* Função recursiva de busca de alunos */
+int buscaAluno(regaluno alunos[], int num, int n){
+	
+	if(n == 0){
+		return -1;
+	}
+	else{
+		if(alunos[n - 1].rga == num){
+			return n - 1;
+		}
+		else
+			return buscaAluno(alunos, num, n - 1);
+	}
+}
 
 
 /* Media Geral em função recursiva */
